@@ -1,0 +1,17 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: knative-quarkus-app
+spec:
+  template:
+    spec:
+      containers:
+      - image: onoriel/quarkus
+        ports:
+          - containerPort: 8080
+        livenessProbe:
+          httpGet:
+            path: /health/live
+        readinessProbe:
+          httpGet:
+            path: /health/ready
